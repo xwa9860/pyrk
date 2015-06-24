@@ -18,7 +18,9 @@ class THComponent(object):
                  alpha_temp=0*units.delta_k/units.kelvin,
                  timer=Timer(),
                  heatgen=False,
-                 power_tot=0*units.watt):
+                 power_tot=0*units.watt,
+                 sph=False
+                 ):
         """Initalizes a thermal hydraulic component.
         A thermal-hydraulic component will be treated as one "lump" in the
         lumped capacitance model.
@@ -35,6 +37,13 @@ class THComponent(object):
         :type timer: Timer object
         :param heatgen: is this component a heat generator (fuel)
         :type heatgen: bool
+        :param adv: is this component losses heat from advection
+        :type adv: bool
+        :param advheat: heat transfered through advection(watts), positive if
+        gain heat, negative is loss heat
+        :param sph: is this component a spherical component, spherical equations
+        for heatgen, conduction are different, post-processing is different too
+        :type sph: bool
         """
         self.name = name
         self.vol = vol.to('meter**3')
@@ -53,7 +62,9 @@ class THComponent(object):
         self.power_tot = power_tot
         self.cond = {}
         self.conv = {}
+        self.adv = {}
         self.prev_t_idx = 0
+        self.sph=sph
 
     def temp(self, timestep):
         """The temperature of this component at the chosen timestep
@@ -102,5 +113,19 @@ class THComponent(object):
             "area": area.to('meter**2')
         }
 
-    def add_conduction(self, env, area):
-        self.cond[env] = area.to('meter**2')
+    def add_conduction(self, env, k, area=0.0*units.meter**2, L=0.0*units.meter,
+                       r_b=0.0*units.meter, r_env=0.0*units.meter):
+        self.cond[env] = {
+            "k": k.to('watts/meter/kelvin'),
+            "area": area.to('meter**2'),
+            "L":L.to('meter'),
+            "r_b": r_b.to('meter'),
+            "r_env": r_env.to('meter')
+        }
+
+    def add_advection(self, name, m_flow, t_in, cp):
+        self.adv[name] = {
+            "m_flow": m_flow.to('kg/second'),
+            "t_in": t_in.to('kelvin'),
+            "cp": cp.to('joule/kg/kelvin')
+        }

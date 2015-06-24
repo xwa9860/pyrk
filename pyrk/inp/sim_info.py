@@ -26,10 +26,14 @@ class SimInfo(object):
         self.rho_ext = self.init_rho_ext(rho_ext)
         self.feedback = feedback
         self.ne = self.init_ne()
+#<<<<<<< HEAD
         self.th = th_system.THSystem(kappa=kappa, components=components)
         self.y = np.zeros(shape=(timer.timesteps(), self.n_entries()),
                           dtype=float)
         self.plotdir = plotdir
+#=======
+#        self.th = th_system.THSystemSphPS(kappa=kappa, components=components)
+#>>>>>>> dev
 
     def init_rho_ext(self, rho_ext):
         if rho_ext is None:

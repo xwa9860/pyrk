@@ -16,7 +16,28 @@ from ur import units
 from utils import plotter
 
 
-def update_n(t, y_n, si):
+np.set_printoptions(precision=5, threshold=np.inf)
+
+infile = importlib.import_module("input")
+
+si = sim_info.SimInfo(timer=infile.ti,
+                      components=infile.components,
+                      iso=infile.fission_iso,
+                      e=infile.spectrum,
+                      n_precursors=infile.n_pg,
+                      n_decay=infile.n_dg,
+                      kappa=infile.kappa,
+                      feedback=infile.feedback,
+                      #rho_ext=infile.rho_ext
+                      )
+
+n_components = len(si.components)
+
+# _y is the matrix of dimension timesteps*nb of equations(unknowns)
+_y = np.zeros(shape=(si.timer.timesteps(), si.n_entries()), dtype=float)
+
+
+def update_n(t, y_n):
     """This function updates the neutronics block.
 
     :param t: the time [s] at which the update is occuring.
@@ -45,7 +66,17 @@ def update_th(t, y_n, y_th, si):
     si.y[t_idx][n_n:] = y_th
 
 
-def f_n(t, y, si):
+def update_f(t, y):
+    """ update f by updating n(neutronics) and th(thermal-hydraulics) arrays
+    """
+    idx = 1+si.n_pg+si.n_dg
+    y_n = y[:idx]
+    y_th = y[idx:]
+    update_n(t, y_n)
+    update_th(t, y_n, y_th)
+
+
+def f_n(t, y):
     """Returns the neutronics block solution at time t
 
     :param t: the time [s] at which the update is occuring.
@@ -80,6 +111,7 @@ def f_th(t, y_th, si):
     f = units.Quantity(np.zeros(shape=(si.n_components(),), dtype=float),
                        'kelvin / second')
     power = si.y[t_idx][0]
+    #power = _y[t_idx][0]
     o_i = 1+si.n_pg
     o_f = 1+si.n_pg+si.n_dg
     omegas = si.y[t_idx][o_i:o_f]
@@ -91,14 +123,22 @@ def f_th(t, y_th, si):
     return f
 
 
-def y0(si):
+def f(t, y):
+    i_th = 1+si.n_pg+si.n_dg
+    y_th = y[i_th:]
+    to_ret = np.concatenate((f_n(t, y), f_th(t, y_th)))
+    return to_ret
+
+
+def y0():
     """The initial conditions for y"""
     i = 0
     f = np.zeros(shape=(si.n_entries(),), dtype=float)
-    f[i] = 1.0  # real power is 236 MWth, but normalized is 1
+    f[i] = 1 # todo change the code to have this from input
+    # real power is 236 MWth, but normalized is 1
     for j in range(0, si.n_pg):
         i += 1
-        f[i] = si.ne._pd.betas()[j]/(si.ne._pd.lambdas()[j]*si.ne._pd.Lambda())
+        f[i] = f[0]*si.ne._pd.betas()[j]/(si.ne._pd.lambdas()[j]*si.ne._pd.Lambda())
     for k in range(0, si.n_dg):
         i += 1
         f[i] = 0
@@ -126,23 +166,20 @@ def y0_th(si):
 
 def solve(si, y, infile):
     """Conducts the solution step, based on the dopri5 integrator in scipy"""
-    n = ode(f_n).set_integrator('dopri5')
-    n.set_initial_value(y0_n(si), si.timer.
-                        t0.magnitude)
-    n.set_f_params(si)
-    th = ode(f_th).set_integrator('dopri5', nsteps=infile.nsteps)
-    th.set_initial_value(y0_th(si), si.timer.t0.magnitude)
-    th.set_f_params(si)
-    while (n.successful()
-           and n.t < si.timer.tf.magnitude
-           and th.t < si.timer.tf.magnitude):
+    eqn = ode(f).set_integrator('dopri5', nsteps=infile.nsteps)
+    eqn.set_initial_value(y0(), si.timer.t0.magnitude)
+    while (eqn.successful() and eqn.t < si.timer.tf.magnitude):
         si.timer.advance_one_timestep()
-        n.integrate(si.timer.current_time().magnitude)
-        update_n(n.t, n.y, si)
-        th.integrate(si.timer.current_time().magnitude)
-        update_th(th.t, n.y, th.y, si)
-    return si.y
+        eqn.integrate(si.timer.current_time().magnitude)
+        update_f(eqn.t, eqn.y)
+    return _y
 
+def post_proc():
+    '''solution from the equation systems may not be temperature, for example in
+    spherical system, the equations are solved for U=rT, where r and T are
+    radius and temperature of the point where the equation is solved for.
+    '''
+    pass
 
 def log_results(si):
     pyrklog.info("\nReactivity : \n"+str(si.ne._rho))
