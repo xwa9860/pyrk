@@ -1,4 +1,4 @@
-2015-07-10 15:51:43,591 - pyrk logger - CRITICAL 
+2015-07-03 11:35:59,970 - pyrk logger - CRITICAL 
  
 Welcome to PyRK.
 (c) Kathryn D. Huff
@@ -32,4 +32,10 @@ Perhaps it's time for a coffee.
                ?@QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQR                            
                  `?RQQQQQQQQQQQQQQQQQQQQQQQQQQQ#R^                              
                       7RRQQQQQQQQQQQQQQQQQWE"`.     
+
+/global/software/sl-6.x86_64/modules/python/2.7.8/scipy/0.14.0/lib/python2.7/site-packages/scipy/integrate/_ode.py:949: UserWarning: dopri5: problem is probably stiff (interrupted)
+  self.messages.get(idid, 'Unexpected idid=%s' % idid))
+2015-07-03 14:52:45,355 - pyrk logger - CRITICAL 
+ 
+Simulation succeeded.
 
