@@ -1,7 +1,7 @@
 #!/bin/sh
-#SBATCH --job-name=siminfoorder
-#SBATCH --output=siminfoorder.log
-#SBATCH --error=siminfoorder.serr
+#SBATCH --job-name=lambda1
+#SBATCH --output=lambda1.log
+#SBATCH --error=lambda1.serr
 #SBATCH --partition=savio
 #SBATCH --time=4:00:00
 #SBATCH --nodes=1

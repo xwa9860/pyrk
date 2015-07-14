@@ -1,0 +1,41 @@
+2015-07-14 10:47:44,756 - pyrk logger - CRITICAL 
+ 
+Welcome to PyRK.
+(c) Kathryn D. Huff
+Your simulation is starting.
+Perhaps it's time for a coffee.
+                                                                                
+                                                                                
+                                                                                
+                 ,,,,yggyQQQQQQQQQQQQQQQQQyyyy,,,,                              
+        ,,gQQQQQQQQQQQQ#WWWEEEEERRRREEEEWWW#QQQQQQQQQQQQQy,,                    
+   ,gQQQQQQWR"D^^.-~~'~~WW~-..aQ     ,},,....... ,.``?RW@QQQQQQ,                
+ ,QQQWR^.           ,`Bm-gj^@L  .gyy, ``Q~-,,,a~^^         ^"WQQQQ              
+ @QQQy      ,-~^`          jQ,,DMmnmGQ`|Q        `"~.        ,#QQQ,             
+ @QQQQQQQQy,, `````         Q          #`    ````^""^^,,y#QQQQQQQQQQQQQg        
+ @QQQQQQQQQQQQQQQQQQQyyyy,,QQ@Q,,,,,,#Q,,,,ygg#QQQQQQQQQQQQQQQQQQQQQQQQQQQQ     
+ ]QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ"RRQQQQQQQQ   
+  QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ    `@QQQQQQ  
+  QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQM      "QQQQQQ 
+  @QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ        ]QQQQQ 
+  'QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQM        ]QQQQQ 
+   @QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ         QQQQQ  
+    QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQM       ,QQQQQ^  
+    ]QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ     ,gQQQQQR    
+     @QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQyQQQQQQQQQM^      
+      @QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ#WR^`         
+       @QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ^                   
+        @QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ~                    
+         "QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQE                      
+           YQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ#^                       
+            'YQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ#T                         
+               ?@QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQR                            
+                 `?RQQQQQQQQQQQQQQQQQQQQQQQQQQQ#R^                              
+                      7RRQQQQQQQQQQQQQQQQQWE"`.     
+
+/global/software/sl-6.x86_64/modules/python/2.7.8/scipy/0.14.0/lib/python2.7/site-packages/scipy/integrate/_ode.py:741: UserWarning: vode: Excess work done on this call. (Perhaps wrong MF.)
+  'Unexpected istate=%s' % istate))
+2015-07-14 12:08:28,027 - pyrk logger - CRITICAL 
+ 
+Simulation succeeded.
+

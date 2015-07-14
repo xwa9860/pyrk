@@ -31,7 +31,7 @@ si = sim_info.SimInfo(timer=infile.ti,
                       n_precursors=infile.n_pg,
                       n_decay=infile.n_dg,
                       kappa=infile.kappa,
-                      rho_ext=infile.rho_ext
+                      rho_ext=infile.rho_ext,
                       feedback=infile.feedback,
                       output_plot_dir=infile.output_plot_dir)
 
