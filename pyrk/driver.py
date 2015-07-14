@@ -31,9 +31,9 @@ si = sim_info.SimInfo(timer=infile.ti,
                       n_precursors=infile.n_pg,
                       n_decay=infile.n_dg,
                       kappa=infile.kappa,
-                      feedback=infile.feedback,
                       rho_ext=infile.rho_ext
-                      )
+                      feedback=infile.feedback,
+                      output_plot_dir=infile.output_plot_dir)
 
 n_components = len(si.components)
 
@@ -174,25 +174,18 @@ def y0_th():
 
 def solve():
     """Conducts the solution step, based on the dopri5 integrator in scipy"""
-    eqn = ode(f).set_integrator('vode', method='bdf', nsteps=infile.nsteps, max_step=1.0)
+    eqn = ode(f).set_integrator('vode', method='bdf', nsteps=infile.nsteps, max_step=1.0, order=2)
     #eqn = ode(f).set_integrator('dopri5', nsteps=infile.nsteps)
     eqn.set_initial_value(y0(), si.timer.t0.magnitude)
     tf1=50*units.seconds
     while (eqn.successful() and eqn.t < tf1.magnitude): #si.timer.tf1.magnitude):
       #TODO: change eqn.t limit to input
-        #print 'before'
-        #print _y
         si.timer.advance_one_timestep()
-        #print 'mid'
-        #print _y
-        #eqn.integrate(si.timer.current_time().magnitude)
         eqn.integrate(si.timer.current_time().magnitude)
         #eqn.integrate(si.timer.tf.magnitude, step=True)
         print si.timer.current_time().magnitude
         update_f(eqn.t, eqn.y)
-        #print 'after'
-        #print _y
-    eqn_trans = ode(f).set_integrator('vode', method='bdf', nsteps=infile.nsteps, max_step=1.0)
+    eqn_trans = ode(f).set_integrator('vode', method='bdf', nsteps=infile.nsteps*10, max_step=1.0, order=2)
     eqn_trans.set_initial_value(eqn.y, eqn.t)
     while (eqn_trans.successful() and eqn_trans.t < si.timer.tf.magnitude):
         #print 'before'

@@ -180,3 +180,4 @@ for i in range(0, len(pebble.sub_comp)):
     components.append(pebble.sub_comp[i])
 components.extend([pebble, cool])
 
+output_plot_dir='images'

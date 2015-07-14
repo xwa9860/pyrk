@@ -12,7 +12,8 @@ class SimInfo(object):
                  timer=Timer(),
                  components={},
                  iso="u235", e="thermal", n_precursors=6, n_decay=11,
-                 kappa=0.0, rho_ext=None, feedback=False):
+                 kappa=0.0, rho_ext=None, feedback=False,
+                 output_plot_dir='images'):
         """This class holds information about a reactor kinetics simulation
         """
         self.timer = timer
@@ -23,6 +24,7 @@ class SimInfo(object):
         self.n_dg = n_decay
         self.rho_ext = self.init_rho_ext(rho_ext)
         self.feedback = feedback
+        self.output_plot_dir=output_plot_dir
         self.ne = self.init_ne()
         self.th = th_system.THSystemSphFVM(kappa=kappa, components=components)
 
