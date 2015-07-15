@@ -1,13 +1,7 @@
 #!/bin/sh
-<<<<<<< HEAD
 #SBATCH --job-name=lambda2
 #SBATCH --output=lambda2.log
 #SBATCH --error=lambda2.serr
-=======
-#SBATCH --job-name=lambda1
-#SBATCH --output=lambda1.log
-#SBATCH --error=lambda1.serr
->>>>>>> f8c62ad56461d52f7449f41ce3dde677dde15739
 #SBATCH --partition=savio
 #SBATCH --time=4:00:00
 #SBATCH --nodes=1

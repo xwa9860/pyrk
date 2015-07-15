@@ -40,16 +40,13 @@ si = sim_info.SimInfo(timer=infile.ti,
                       kappa=infile.kappa,
                       rho_ext=infile.rho_ext,
                       feedback=infile.feedback,
-<<<<<<< HEAD
-                      rho_ext=infile.rho_ext,
                       plot_dir=infile.plot_dir
                       )
-=======
-                      output_plot_dir=infile.output_plot_dir)
->>>>>>> f8c62ad56461d52f7449f41ce3dde677dde15739
-
 n_components = len(si.components)
 
+# tsol_steady and sol_steady are the list containing the timesteps that the sovler takes and the solution at each step
+tsol_steady=[]
+sol_steady =[]
 # _y is the matrix of dimension timesteps*nb of equations(unknowns)
 _y = np.zeros(shape=(si.timer.timesteps(), si.n_entries()), dtype=float)
 
@@ -145,7 +142,7 @@ def f_th(t, y_th):
 
 
 def f(t, y):
-    print 't in f %f' %t
+    #print 't in f %f' %t
     i_th = 1+si.n_pg+si.n_dg
     y_th = y[i_th:]
     to_ret = np.concatenate((f_n(t, y), f_th(t, y_th)))
@@ -187,63 +184,38 @@ def y0_th():
 
 def solve():
     """Conducts the solution step, based on the dopri5 integrator in scipy"""
-<<<<<<< HEAD
+    ################Looking for steady state phase(without feedback)################################### 
     #eqn = ode(f).set_integrator('vode', method='bdf', nsteps=infile.nsteps, max_step=1.0)
-    
-    eqn = ode(f).set_integrator('dopri5', nsteps=infile.nsteps)
+    eqn = ode(f).set_integrator('dopri5', nsteps=infile.nsteps, max_step=1.0)
     #eqn = ode(f)
     #eqn._integrator= my_vode(method='bdf', order=2, nsteps=infile.nsteps, max_step=1.0)
-=======
-    eqn = ode(f).set_integrator('vode', method='bdf', nsteps=infile.nsteps, max_step=1.0, order=2)
-    #eqn = ode(f).set_integrator('dopri5', nsteps=infile.nsteps)
->>>>>>> f8c62ad56461d52f7449f41ce3dde677dde15739
     eqn.set_initial_value(y0(), si.timer.t0.magnitude)
-    tf1=40*units.seconds
+    tf1=10*units.seconds
     while (eqn.successful() and eqn.t < tf1.magnitude): #si.timer.tf1.magnitude):
-      #TODO: change eqn.t limit to input
-<<<<<<< HEAD
-        #print 'before'
-        #print _y
         #si.timer.advance_one_timestep()
-        #print 'mid'
-        #print _y
         #eqn.integrate(si.timer.current_time().magnitude)
         eqn.integrate(tf1.magnitude)
         #assert eqn.t+0.01>si.timer.current_time().magnitude, '%f and %f' %(eqn.t, 
         #    si.timer.current_time().magnitude)
         #eqn.integrate(si.timer.tf.magnitude, step=True)
-        print 'timer time %f' %si.timer.current_time().magnitude
+        sol_steady.append(eqn.y)
+        print eqn.y
+        tsol_steady.append(eqn.t)
         print 'eqn time %f' %eqn.t
-        #update_f(eqn.t, eqn.y)
-        #print 'after'
-        #print _y
+    #update_f(eqn.t, eqn.y)
+    ###################transient phase#####################################################
     #eqn_trans = ode(f)
     #eqn_trans._integrator= my_vode(method='bdf', nsteps=infile.nsteps*10, max_step=1.0)
     eqn_trans = ode(f).set_integrator('dopri5', nsteps=infile.nsteps)
     #eqn_trans = ode(f).set_integrator('vode', method='bdf', nsteps=infile.nsteps, max_step=1.0)
     eqn_trans.set_initial_value(eqn.y, si.timer.t0.magnitude)
-=======
-        si.timer.advance_one_timestep()
-        eqn.integrate(si.timer.current_time().magnitude)
-        #eqn.integrate(si.timer.tf.magnitude, step=True)
-        print si.timer.current_time().magnitude
-        update_f(eqn.t, eqn.y)
-    eqn_trans = ode(f).set_integrator('vode', method='bdf', nsteps=infile.nsteps*10, max_step=1.0, order=2)
-    eqn_trans.set_initial_value(eqn.y, eqn.t)
->>>>>>> f8c62ad56461d52f7449f41ce3dde677dde15739
     while (eqn_trans.successful() and eqn_trans.t < si.timer.tf.magnitude):
-        #print 'before'
-        #print _y
         si.timer.advance_one_timestep()
-        #print 'mid'
-        #print _y
         eqn_trans.integrate(si.timer.current_time().magnitude)
         #eqn_trans.integrate(si.timer.current_time().magnitude, step=True)
         #eqn_trans.integrate(si.timer.tf.magnitude, step=True)
         print 'timer time %f' %si.timer.current_time().magnitude
         update_f(eqn_trans.t, eqn_trans.y)
-        #print 'after'
-        #print _y
     return _y
 
 
@@ -257,7 +229,7 @@ def log_results():
     logger.info("\nPrecursor betas: \n"+str(si.ne._pd.betas()))
     logger.info("\nDecay kappas: \n"+str(si.ne._dd.kappas()))
     logger.info("\nDecay lambdas: \n"+str(si.ne._dd.lambdas()))
-
+    #logger.info("\nStady state:\n" + np.array_str(sol)+'\n' + np.array_str(tsol))
 
 """Run it as a script"""
 if __name__ == "__main__":
@@ -269,5 +241,5 @@ if __name__ == "__main__":
                         logo.read())
     sol = solve()
     log_results()
-    plotter.plot(sol, si, si.plot_dir)
+    plotter.plot(sol, si, si.plot_dir, tsol_steady=tsol_steady,  sol_steady=sol_steady)
     logger.critical("\nSimulation succeeded.\n")

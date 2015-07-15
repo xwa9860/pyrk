@@ -17,7 +17,7 @@ def my_colors(num, n):
     return color_val
 
 
-def plot(y, si, plot_dir):
+def plot(y, si, plot_dir, tsol_steady=[], sol_steady=[]):
     """Creates plots for interesting values in the simulation.
     :param y: The full solution array
     :type y: np.ndarray"""
@@ -31,6 +31,8 @@ def plot(y, si, plot_dir):
         plot_omegas(x, y, si, plot_dir)
     plot_temps_together(x, y, si, plot_dir)
     plot_temps_separately(x, y, si, plot_dir)
+    plot_steady_temp(tsol_steady, sol_steady, si, plot_dir)
+
 
 
 def plot_reactivity(x, si, plot_dir):
@@ -78,6 +80,22 @@ def plot_temps_together(x, y, si, plot_dir):
     plt.title("Temperature of Each Component")
     saveplot("temps", plt, plot_dir)
 
+def plot_steady_temp(tsol_steady, sol_steady, si, plot_dir):
+    print tsol_steady
+    num=1
+    idx = 1 + si.ne._npg + si.ne._ndg + num
+    print sol_steady[:idx]
+    for num, comp in enumerate(si.components):
+        idx = 1 + si.ne._npg + si.ne._ndg + num
+        plt.plot(tsol_steady, sol_steady[:, idx], label=comp.name,
+                 color=my_colors(num, len(si.components)), marker='.')
+    plt.legend()
+    plt.xlabel("Time [s]")
+    plt.ylabel("Temperature [K]")
+    plt.title("Temperature of Each Component During No-feedback Phase")
+    saveplot("steady_temps", plt, plot_dir)
+
+
 
 def plot_temps_separately(x, y, si, plot_dir):
     for num, comp in enumerate(si.components):
@@ -116,8 +134,8 @@ def plot_omegas(x, y, si, plot_dir):
 
 
 def saveplot(name, plt, plot_dir):
-    if not os.path.exists(plotdir):
-        os.makedirs(plotdir)
-    plt.savefig(str(plotdir+"/"+name+'.pdf'), bbox_inches='tight')
-    plt.savefig(str(plotdir+"/"+name+'.eps'), bbox_inches='tight')
+    if not os.path.exists(plot_dir):
+        os.makedirs(plot_dir)
+    plt.savefig(str(plot_dir+"/"+name+'.pdf'), bbox_inches='tight')
+    plt.savefig(str(plot_dir+"/"+name+'.eps'), bbox_inches='tight')
     plt.clf()

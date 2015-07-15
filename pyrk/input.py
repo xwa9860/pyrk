@@ -180,10 +180,6 @@ for i in range(0, len(pebble.sub_comp)):
     components.append(pebble.sub_comp[i])
 components.extend([pebble, cool])
 
-<<<<<<< HEAD
 
 #postprocessing
 plot_dir = 'image'
-=======
-output_plot_dir='images'
->>>>>>> f8c62ad56461d52f7449f41ce3dde677dde15739
