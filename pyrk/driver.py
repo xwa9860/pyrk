@@ -39,7 +39,8 @@ si = sim_info.SimInfo(timer=infile.ti,
                       n_decay=infile.n_dg,
                       kappa=infile.kappa,
                       feedback=infile.feedback,
-                      rho_ext=infile.rho_ext
+                      rho_ext=infile.rho_ext,
+                      plot_dir=infile.plot_dir
                       )
 
 n_components = len(si.components)
@@ -192,7 +193,7 @@ def solve():
       #TODO: change eqn.t limit to input
         #print 'before'
         #print _y
-        si.timer.advance_one_timestep()
+        si.timer.advance_timestep(10)
         #print 'mid'
         #print _y
         #eqn.integrate(si.timer.current_time().magnitude)
@@ -207,7 +208,7 @@ def solve():
         #print _y
     #eqn_trans = ode(f)
     #eqn_trans._integrator= my_vode(method='bdf', nsteps=infile.nsteps*10, max_step=1.0)
-    eqn_trans = ode(f).set_integrator('dopri5', nsteps=infile.nsteps*10)
+    eqn_trans = ode(f).set_integrator('dopri5', nsteps=infile.nsteps)
     #eqn_trans = ode(f).set_integrator('vode', method='bdf', nsteps=infile.nsteps, max_step=1.0)
     eqn_trans.set_initial_value(eqn.y, eqn.t)
     while (eqn_trans.successful() and eqn_trans.t < si.timer.tf.magnitude):
@@ -248,5 +249,5 @@ if __name__ == "__main__":
                         logo.read())
     sol = solve()
     log_results()
-    plotter.plot(sol, si)
+    plotter.plot(sol, si, si.plot_dir)
     logger.critical("\nSimulation succeeded.\n")

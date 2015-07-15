@@ -42,10 +42,10 @@ kappa = 0.0
 t0 = 0.00*units.seconds
 
 # Timestep
-dt = 0.01*units.seconds
+dt = 0.1*units.seconds
 
 # Final Time
-tf = 80*units.seconds
+tf = 100*units.seconds
 
 
 def area_sphere(r):
@@ -180,3 +180,6 @@ for i in range(0, len(pebble.sub_comp)):
     components.append(pebble.sub_comp[i])
 components.extend([pebble, cool])
 
+
+#postprocessing
+plot_dir = 'image'

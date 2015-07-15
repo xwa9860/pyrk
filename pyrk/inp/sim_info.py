@@ -12,7 +12,7 @@ class SimInfo(object):
                  timer=Timer(),
                  components={},
                  iso="u235", e="thermal", n_precursors=6, n_decay=11,
-                 kappa=0.0, rho_ext=None, feedback=False):
+                 kappa=0.0, rho_ext=None, feedback=False, plot_dir='images'):
         """This class holds information about a reactor kinetics simulation
         """
         self.timer = timer
@@ -25,7 +25,7 @@ class SimInfo(object):
         self.feedback = feedback
         self.ne = self.init_ne()
         self.th = th_system.THSystemSphFVM(kappa=kappa, components=components)
-
+        self.plot_dir=plot_dir
     def init_rho_ext(self, rho_ext):
         if rho_ext is None:
             rho_ext = ri.ReactivityInsertion(self.timer)

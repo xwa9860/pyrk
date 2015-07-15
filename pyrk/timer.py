@@ -13,14 +13,13 @@ class Timer(object):
                  tf=1.0*units.seconds,
                  dt=1.0*units.seconds):
         self.t0 = validation.validate_ge("t0", t0, 0.0*units.seconds)
-        #TODO : commented out validation on tf
-        self.tf = tf#validation.validate_ge("tf", tf, t0)
+        self.tf = validation.validate_ge("tf", tf, t0)
         self.dt = validation.validate_ge("dt", dt, 0.0*units.seconds)
         self.series = units.Quantity(np.linspace(start=t0.magnitude,
                                                  stop=tf.magnitude,
                                                  num=self.timesteps()),
                                      'seconds')
-        self.ts = 0
+        self.ts = 0  #ts: time step
 
     def t_idx(self, time):
         """given the actual time, in seconds, this returns the index of t."""
@@ -43,19 +42,23 @@ class Timer(object):
         self.advance_time(self.t(self.ts+1))
         return self.ts
 
+    def advance_timestep(self, n):
+        self.advance_time(self.t(self.ts+10))
+        return self.ts
+    
     def advance_time(self, time):
         new_ts = self.t_idx(time)
         old_ts = self.ts
-        if (abs(new_ts - old_ts) > 1):
-            msg = "At timestep "
-            msg += str(self.ts)
-            msg += ", which translates to time ("
-            msg += str(self.t(self.ts))
-            msg += ") the new timestep ("
-            msg += str(new_ts)
-            msg += ") was more than one step greater than the old timestep: "
-            msg += str(old_ts)
-            raise RuntimeError(msg)
+        #if (abs(new_ts - old_ts) > 1):
+        #    msg = "At timestep "
+        #    msg += str(self.ts)
+        #    msg += ", which translates to time ("
+        #    msg += str(self.t(self.ts))
+        #    msg += ") the new timestep ("
+        #    msg += str(new_ts)
+        #    msg += ") was more than one step greater than the old timestep: "
+        #    msg += str(old_ts)
+        #    raise RuntimeError(msg)
         self.ts = new_ts
         return validation.validate_le("current time", time, self.tf)
 
