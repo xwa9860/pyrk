@@ -78,11 +78,16 @@ class PrecursorData(object):
     def _get_Lambda(self, nuc, e):
         """
         TODO: deifnition of Lambda
+        TODO: changed lambda to 1 for test, remember to change it back
         """
         Lambda_dict = {}
         Lambda_dict["u235"] = {}
         Lambda_dict["pu239"] = {}
+<<<<<<< HEAD
         Lambda_dict["u235"]["thermal"] =1.08e-5
+=======
+        Lambda_dict["u235"]["thermal"] = 1 #1.08e-5
+>>>>>>> f8c62ad56461d52f7449f41ce3dde677dde15739
         Lambda_dict["u235"]["fast"] = 0
         Lambda_dict["pu239"]["thermal"] = 0
         Lambda_dict["pu239"]["fast"] = 0

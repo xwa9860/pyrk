@@ -1,0 +1,36 @@
+2015-07-14 10:28:47,448 - pyrk logger - CRITICAL 
+ 
+Welcome to PyRK.
+(c) Kathryn D. Huff
+Your simulation is starting.
+Perhaps it's time for a coffee.
+                                                                                
+                                                                                
+                                                                                
+                 ,,,,yggyQQQQQQQQQQQQQQQQQyyyy,,,,                              
+        ,,gQQQQQQQQQQQQ#WWWEEEEERRRREEEEWWW#QQQQQQQQQQQQQy,,                    
+   ,gQQQQQQWR"D^^.-~~'~~WW~-..aQ     ,},,....... ,.``?RW@QQQQQQ,                
+ ,QQQWR^.           ,`Bm-gj^@L  .gyy, ``Q~-,,,a~^^         ^"WQQQQ              
+ @QQQy      ,-~^`          jQ,,DMmnmGQ`|Q        `"~.        ,#QQQ,             
+ @QQQQQQQQy,, `````         Q          #`    ````^""^^,,y#QQQQQQQQQQQQQg        
+ @QQQQQQQQQQQQQQQQQQQyyyy,,QQ@Q,,,,,,#Q,,,,ygg#QQQQQQQQQQQQQQQQQQQQQQQQQQQQ     
+ ]QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ"RRQQQQQQQQ   
+  QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ    `@QQQQQQ  
+  QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQM      "QQQQQQ 
+  @QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ        ]QQQQQ 
+  'QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQM        ]QQQQQ 
+   @QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ         QQQQQ  
+    QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQM       ,QQQQQ^  
+    ]QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ     ,gQQQQQR    
+     @QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQyQQQQQQQQQM^      
+      @QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ#WR^`         
+       @QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ^                   
+        @QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ~                    
+         "QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQE                      
+           YQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ#^                       
+            'YQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ#T                         
+               ?@QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQR                            
+                 `?RQQQQQQQQQQQQQQQQQQQQQQQQQQQ#R^                              
+                      7RRQQQQQQQQQQQQQQQQQWE"`.     
+
+slurmstepd: *** JOB 408766 CANCELLED AT 2015-07-14T10:43:47 *** on n0059.savio0

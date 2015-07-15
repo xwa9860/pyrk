@@ -38,10 +38,15 @@ si = sim_info.SimInfo(timer=infile.ti,
                       n_precursors=infile.n_pg,
                       n_decay=infile.n_dg,
                       kappa=infile.kappa,
+                      rho_ext=infile.rho_ext,
                       feedback=infile.feedback,
+<<<<<<< HEAD
                       rho_ext=infile.rho_ext,
                       plot_dir=infile.plot_dir
                       )
+=======
+                      output_plot_dir=infile.output_plot_dir)
+>>>>>>> f8c62ad56461d52f7449f41ce3dde677dde15739
 
 n_components = len(si.components)
 
@@ -182,15 +187,21 @@ def y0_th():
 
 def solve():
     """Conducts the solution step, based on the dopri5 integrator in scipy"""
+<<<<<<< HEAD
     #eqn = ode(f).set_integrator('vode', method='bdf', nsteps=infile.nsteps, max_step=1.0)
     
     eqn = ode(f).set_integrator('dopri5', nsteps=infile.nsteps)
     #eqn = ode(f)
     #eqn._integrator= my_vode(method='bdf', order=2, nsteps=infile.nsteps, max_step=1.0)
+=======
+    eqn = ode(f).set_integrator('vode', method='bdf', nsteps=infile.nsteps, max_step=1.0, order=2)
+    #eqn = ode(f).set_integrator('dopri5', nsteps=infile.nsteps)
+>>>>>>> f8c62ad56461d52f7449f41ce3dde677dde15739
     eqn.set_initial_value(y0(), si.timer.t0.magnitude)
     tf1=40*units.seconds
     while (eqn.successful() and eqn.t < tf1.magnitude): #si.timer.tf1.magnitude):
       #TODO: change eqn.t limit to input
+<<<<<<< HEAD
         #print 'before'
         #print _y
         #si.timer.advance_one_timestep()
@@ -211,6 +222,15 @@ def solve():
     eqn_trans = ode(f).set_integrator('dopri5', nsteps=infile.nsteps)
     #eqn_trans = ode(f).set_integrator('vode', method='bdf', nsteps=infile.nsteps, max_step=1.0)
     eqn_trans.set_initial_value(eqn.y, si.timer.t0.magnitude)
+=======
+        si.timer.advance_one_timestep()
+        eqn.integrate(si.timer.current_time().magnitude)
+        #eqn.integrate(si.timer.tf.magnitude, step=True)
+        print si.timer.current_time().magnitude
+        update_f(eqn.t, eqn.y)
+    eqn_trans = ode(f).set_integrator('vode', method='bdf', nsteps=infile.nsteps*10, max_step=1.0, order=2)
+    eqn_trans.set_initial_value(eqn.y, eqn.t)
+>>>>>>> f8c62ad56461d52f7449f41ce3dde677dde15739
     while (eqn_trans.successful() and eqn_trans.t < si.timer.tf.magnitude):
         #print 'before'
         #print _y
