@@ -1,4 +1,4 @@
-2015-07-14 14:54:26,694 - pyrk logger - CRITICAL 
+2015-07-14 18:16:33,320 - pyrk logger - CRITICAL 
  
 Welcome to PyRK.
 (c) Kathryn D. Huff
@@ -33,4 +33,7 @@ Perhaps it's time for a coffee.
                  `?RQQQQQQQQQQQQQQQQQQQQQQQQQQQ#R^                              
                       7RRQQQQQQQQQQQQQQQQQWE"`.     
 
-slurmstepd: *** JOB 408884 CANCELLED AT 2015-07-14T14:58:05 *** on n0071.savio0
+2015-07-14 19:01:51,788 - pyrk logger - CRITICAL 
+ 
+Simulation succeeded.
+
