@@ -31,7 +31,7 @@ def plot(y, si, plot_dir, tsol_steady=[], sol_steady=[]):
         plot_omegas(x, y, si, plot_dir)
     plot_temps_together(x, y, si, plot_dir)
     plot_temps_separately(x, y, si, plot_dir)
-    plot_steady_temp(tsol_steady, sol_steady, si, plot_dir)
+    #plot_steady_temp(tsol_steady, sol_steady, si, plot_dir)
 
 
 
@@ -81,12 +81,12 @@ def plot_temps_together(x, y, si, plot_dir):
     saveplot("temps", plt, plot_dir)
 
 def plot_steady_temp(tsol_steady, sol_steady, si, plot_dir):
+    print 'tsol' 
     print tsol_steady
-    num=1
-    idx = 1 + si.ne._npg + si.ne._ndg + num
-    print sol_steady[:idx]
+    print sol_steady
     for num, comp in enumerate(si.components):
-        idx = 1 + si.ne._npg + si.ne._ndg + num
+        idx = 1 + si.ne._npg + si.ne._ndg + num 
+        print len(tsol_steady)
         plt.plot(tsol_steady, sol_steady[:, idx], label=comp.name,
                  color=my_colors(num, len(si.components)), marker='.')
     plt.legend()

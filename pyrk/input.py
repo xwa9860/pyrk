@@ -45,8 +45,8 @@ t0 = 0.00*units.seconds
 dt = 0.1*units.seconds
 
 # Final Time
-tf = 100*units.seconds
-
+tf = 140.0*units.seconds
+t_ext = 110.0*units.seconds
 
 def area_sphere(r):
     assert(r >= 0*units.meter)
@@ -112,8 +112,8 @@ feedback = True
 
 from reactivity_insertion import RampReactivityInsertion
 rho_ext = RampReactivityInsertion(timer=ti,
-                                     t_start=60.0*units.seconds,
-                                     t_end=70.0*units.seconds,
+                                     t_start=t_ext,
+                                     t_end=t_ext+10.0*units.seconds,
                                      rho_init=0.0*units.delta_k,
                                      rho_rise=600.0*units.pcm,
                                      rho_final=600.0*units.pcm)

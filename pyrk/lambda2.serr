@@ -1,4 +1,4 @@
-2015-07-14 23:21:36,085 - pyrk logger - CRITICAL 
+2015-07-16 14:36:11,485 - pyrk logger - CRITICAL 
  
 Welcome to PyRK.
 (c) Kathryn D. Huff
@@ -33,17 +33,4 @@ Perhaps it's time for a coffee.
                  `?RQQQQQQQQQQQQQQQQQQQQQQQQQQQ#R^                              
                       7RRQQQQQQQQQQQQQQQQQWE"`.     
 
-/global/software/sl-6.x86_64/modules/python/2.7.8/scipy/0.14.0/lib/python2.7/site-packages/scipy/integrate/_ode.py:949: UserWarning: dopri5: larger nmax is needed
-  self.messages.get(idid, 'Unexpected idid=%s' % idid))
-/global/software/sl-6.x86_64/modules/python/2.7.8/scipy/0.14.0/lib/python2.7/site-packages/scipy/integrate/_ode.py:949: UserWarning: dopri5: step size becomes too small
-  self.messages.get(idid, 'Unexpected idid=%s' % idid))
-Traceback (most recent call last):
-  File "driver.py", line 252, in <module>
-    plotter.plot(sol, si, si.plot_dir)
-  File "/global/home/users/xwa9860/pyrk/pyrk/utils/plotter.py", line 26, in plot
-    plot_power(x, y, plot_dir)
-  File "/global/home/users/xwa9860/pyrk/pyrk/utils/plotter.py", line 54, in plot_power
-    saveplot("power", plt, plot_dir)
-  File "/global/home/users/xwa9860/pyrk/pyrk/utils/plotter.py", line 119, in saveplot
-    if not os.path.exists(plotdir):
-NameError: global name 'plotdir' is not defined
+slurmstepd: *** JOB 409271 CANCELLED AT 2015-07-16T14:45:32 *** on n0076.savio0

@@ -135,10 +135,9 @@ class THComponent(object):
         if self.prev_t_idx == 0:
             return 0.0*units.kelvin
         else:
-            T0=self.T[0]
-            print self.T[0]
-            #print 'self.T' 
-            #print self.T
+            T0=self.T[900]
+            print 'T0 %f' %T0.magnitude
+            print 'self.T[timestep-1] %f' %self.T[timestep-1].magnitude
             #TODO: hard coded initial steady state temp, at 49s with dt=0.01
             return self.T[timestep-1]-T0
         #return (self.T[self.prev_t_idx] - self.T[self.prev_t_idx-1])
