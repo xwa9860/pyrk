@@ -1,4 +1,4 @@
-2015-07-16 23:50:00,523 - pyrk logger - CRITICAL 
+2015-07-30 13:57:00,408 - pyrk logger - CRITICAL 
  
 Welcome to PyRK.
 (c) Kathryn D. Huff
@@ -33,7 +33,9 @@ Perhaps it's time for a coffee.
                  `?RQQQQQQQQQQQQQQQQQQQQQQQQQQQ#R^                              
                       7RRQQQQQQQQQQQQQQQQQWE"`.     
 
-2015-07-17 02:34:02,183 - pyrk logger - CRITICAL 
+/global/software/sl-6.x86_64/modules/python/2.7.8/scipy/0.14.0/lib/python2.7/site-packages/scipy/integrate/_ode.py:949: UserWarning: dopri5: step size becomes too small
+  self.messages.get(idid, 'Unexpected idid=%s' % idid))
+2015-07-30 15:58:17,867 - pyrk logger - CRITICAL 
  
 Simulation succeeded.
 
