@@ -1,16 +1,35 @@
-from ur import units
-import math
+from utilities.ur import units
 
 
 class THSystem(object):
 
     """This class handles calculations and data related to the
-    thermal hydraulics subblock
+    thermal hydraulics sub block
     """
 
     def __init__(self, kappa, components):
         self.kappa = kappa
         self.components = components
+
+    def dtempdt(self, component, power, omegas, t_idx):
+        to_ret = 0*units.kelvin/units.second
+        cap = (component.rho(t_idx)*component.cp*component.vol)
+        if component.heatgen:
+            to_ret += self.heatgen(component, power, omegas)/cap
+        for interface, area in component.cond.iteritems():
+            env = self.comp_from_name(interface)
+            to_ret -= self.conduction(t_b=component.T[t_idx],
+                                      t_env=env.T[t_idx],
+                                      k=component.k,
+                                      L=component.vol/area,
+                                      A=area)/cap
+        for interface, d in component.conv.iteritems():
+            env = self.comp_from_name(interface)
+            to_ret -= self.convection(t_b=component.T[t_idx],
+                                      t_env=env.T[t_idx],
+                                      h=d['h'],
+                                      A=d['area'])/cap
+        return to_ret
 
     def comp_from_name(self, name):
         """Returns the component with the matching name
@@ -72,8 +91,19 @@ class THSystemSphPS(THSystem):
         return to_ret
 
     def heatgen(self, component, power, omegas):
-        '''to do: change this return to include decay heat'''
-        return power*component.power_tot
+        return (component.power_tot)*((1-self.kappa)*power +
+                                      sum(omegas))
+
+    def mass_trans(self, t_b, t_inlet, H, u):
+        """
+        :param t_b: The temperature of the body
+        :type t_b: float.
+        :param t_inlet: The temperature of the flow inlet
+        :type t_inlet:
+        """
+        num = 2.0*u*(t_b - t_inlet)
+        denom = H
+        return num/denom
 
     def convection(self, t_b, t_env, h, A):
         """

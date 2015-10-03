@@ -1,14 +1,14 @@
 import numpy as np
 from inp import validation
-from ur import units
+from utilities.ur import units
 from density_model import DensityModel
 from timer import Timer
-from material import Material
+from materials.material import Material
 
 class THComponent(object):
     """This class represents a component of the system it has material and
     geometric properties essential to thermal modeling and heat transfer in
-    support of calculations related to the thermal hydraulics subblock
+    support of calculations related to the thermal hydraulics sub block
     """
 
     def __init__(self, name=None,
@@ -63,6 +63,8 @@ class THComponent(object):
         self.cond = {}
         self.conv = {}
         self.adv = {}
+        self.mass = {}
+        self.cust = {}
         self.prev_t_idx = 0
         self.sph=sph
 
@@ -91,7 +93,7 @@ class THComponent(object):
         """Updates the temperature
         :param timestep: the timestep at which to query the temperature
         :type timestep: int
-        :param temp: the new tempterature
+        :param temp: the new temperature
         :type float: float, units of kelvin
         """
         self.T[timestep] = temp
@@ -118,7 +120,7 @@ class THComponent(object):
         self.cond[env] = {
             "k": k.to('watts/meter/kelvin'),
             "area": area.to('meter**2'),
-            "L":L.to('meter'),
+            "L": L.to('meter'),
             "r_b": r_b.to('meter'),
             "r_env": r_env.to('meter')
         }
@@ -129,3 +131,10 @@ class THComponent(object):
             "t_in": t_in.to('kelvin'),
             "cp": cp.to('joule/kg/kelvin')
         }
+
+    def add_mass_trans(self, env, H, u):
+        self.mass[env] = {"H": H,
+                          "u": u}
+
+    def add_custom(self, env, res):
+        self.cust[env] = {"res": res.to(units.kelvin/units.watt)}
