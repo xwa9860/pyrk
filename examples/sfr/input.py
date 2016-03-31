@@ -4,7 +4,7 @@ import math
 from materials.sfrmetal import SFRMetal
 from materials.sodium import Sodium
 from materials.ss316 import SS316
-from materials.timer import Timer
+from timer import Timer
 
 #############################################
 #
@@ -155,8 +155,11 @@ inlet = th.THComponent(name="inlet",
 # The fuel conducts to the clad
 fuel.add_custom('cool', res=res_fuel)
 cool.add_custom('fuel', res=res_fuel)
-fuel.add_conduction('clad', area=a_fuel)
-clad.add_conduction('fuel', area=a_fuel)
+fuel.add_conduction('clad', area=a_fuel, L=1*units.meter)
+clad.add_conduction('fuel', area=a_fuel, L=1*units.meter)
+
+#TODO define L, it's assigned to 1 meter as a placeholder now
+
 
 # The clad convects with the coolant
 clad.add_convection('cool', h=h_cool, area=a_clad)
