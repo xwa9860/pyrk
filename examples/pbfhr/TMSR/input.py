@@ -27,9 +27,9 @@ t0 = 0.00*units.seconds
 # Timestep
 dt = 0.02*units.seconds
 # Final Time
-tf = 250.0*units.seconds
+tf = 50.0*units.seconds
 # Time to turn on feedback
-t_feedback = 150.0*units.seconds
+t_feedback = 15.0*units.seconds
 
 # Thermal hydraulic params
 # Temperature feedbacks of reactivity
@@ -37,8 +37,8 @@ alpha_fuel = -2.72207*units.pcm/units.kelvin
 alpha_cool = -0.78422*units.pcm/units.kelvin
 
 # initial temperature
-t_fuel = (800+273.15)*units.kelvin
-t_cool = (650+273.15)*units.kelvin
+t_fuel = 1080.657*units.kelvin  # from comsol steady state
+t_cool = 959.5507*units.kelvin  # from comsol steady state
 
 kappa = 0.0
 
