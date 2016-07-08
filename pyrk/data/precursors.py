@@ -49,12 +49,15 @@ class PrecursorData(object):
         """
         Retrieves the values for beta_i
         Data for u235 was obtained from http://arxiv.org/pdf/1001.4100.pdf
+        Data for fhr and tmsr are obtained from serpent output
+        ADJ_IFP_IMP_BETA_EFF
         """
         beta_dict = {}
         beta_dict["u235"] = {}
         beta_dict["pu239"] = {}
         beta_dict["sfr"] = {}
         beta_dict["fhr"] = {}
+        beta_dict["tmsr"] = {}
         beta_dict["u235"]["thermal"] = [0.00247, 0.0013845, 0.001222,
                                         0.0026455, 0.000832, 0.000169]
         beta_dict["u235"]["fast"] = [0.000266, 0.001491, 0.001316, 0.002849,
@@ -64,6 +67,14 @@ class PrecursorData(object):
         beta_dict["sfr"]["fast"] = [0.009, 0.087, 0.070, 0.0014, 0.0060, 0.0055]
         beta_dict["fhr"]["thermal"] = [1.48756E-04, 9.45436E-04, 8.29928E-04,
                                        2.21997E-03, 6.90778E-04, 2.31801E-04]
+        beta_dict["tmsr"]["thermal"] = [0.000221045000000000, 0.00114628000000000,
+                                        0.00109860000000000, 0.00308397000000000,
+                                        0.000904433000000000, 0.000318147000000000]
+        beta_dict["tmsr"]["no_dnp"] = []
+        beta_dict["tmsr"]["multipt"] = [0.000221045000000000, 0.00114628000000000,
+                                        0.00109860000000000, 0.00308397000000000,
+                                        0.000904433000000000, 0.000318147000000000,
+                                        0.31650504848545435]
         beta_dict["fhr"]["multipt"] = [1.48756E-04, 9.45436E-04, 8.29928E-04,
                                        2.21997E-03, 6.90778E-04, 2.31801E-04,
                                        0.084349, 0.168983]
@@ -79,6 +90,7 @@ class PrecursorData(object):
         lambda_dict["pu239"] = {}
         lambda_dict["sfr"] = {}
         lambda_dict["fhr"] = {}
+        lambda_dict["tmsr"] = {}
         lambda_dict["u235"]["thermal"] = [math.log(2)/x for x in
                                           [54.51, 21.84, 6.00, 2.23, 0.496,
                                            0.179]]
@@ -88,6 +100,14 @@ class PrecursorData(object):
         lambda_dict["sfr"]["fast"] = [0.0124, 0.0305, 0.111, 0.301, 1.14, 3.01]
         lambda_dict["fhr"]["thermal"] = [1.25723E-02, 3.11643E-02, 1.09837E-01,
                                          3.16355E-01, 1.27045E+00, 7.83939E+00]
+        lambda_dict["tmsr"]["thermal"] = [0.0124906000000000, 0.0318196000000000,
+                                          0.109394000000000, 0.317100000000000,
+                                          1.35373000000000, 8.64310000000000]
+        lambda_dict["tmsr"]["no_dnp"] = []
+        lambda_dict["tmsr"]["multipt"] = [0.0124906000000000, 0.0318196000000000,
+                                          0.109394000000000, 0.317100000000000,
+                                          1.35373000000000, 8.64310000000000,
+                                          1045.2433587850091]
         lambda_dict["fhr"]["multipt"] = [1.25723E-02, 3.11643E-02, 1.09837E-01,
                                          3.16355E-01, 1.27045E+00, 7.83939E+00,
                                          786.3172199, 1209.079474]
@@ -102,11 +122,16 @@ class PrecursorData(object):
         Lambda_dict["pu239"] = {}
         Lambda_dict["sfr"] = {}
         Lambda_dict["fhr"] = {}
+        Lambda_dict["tmsr"] = {}
         Lambda_dict["u235"]["thermal"] = 1.08e-5
         Lambda_dict["u235"]["fast"] = 0
         Lambda_dict["pu239"]["thermal"] = 0
         Lambda_dict["pu239"]["fast"] = 0
         Lambda_dict["sfr"]["fast"] = 1.0e-5
         Lambda_dict["fhr"]["thermal"] = 5.35878E-04 #ADJ_NAUCHI_LIFETIME from serpent
+        Lambda_dict["tmsr"]["thermal"] = 0.000572523000000000 #ADJ_NAUCHI_LIFETIME from serpent
+        Lambda_dict["tmsr"]["no_dnp"] = 0.000572523000000000 #ADJ_NAUCHI_LIFETIME from serpent
+        #  tmsr without delayed neutron precursors
+        Lambda_dict["tmsr"]["multipt"] = 5.0658E-4
         Lambda_dict["fhr"]["multipt"] = 0.000226807
         return Lambda_dict[nuc][e]

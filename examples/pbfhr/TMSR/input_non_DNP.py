@@ -74,7 +74,7 @@ power_tot = 10000000.0*units.watt
 ti = Timer(t0=t0, tf=tf, dt=dt, t_feedback=t_feedback)
 
 # Number of precursor groups
-n_pg = 6
+n_pg = 0
 
 # Number of decay heat groups
 n_dg = 0
@@ -82,13 +82,13 @@ n_dg = 0
 # Fissioning Isotope
 fission_iso = "tmsr"
 # Spectrum
-spectrum = "multipt"
+spectrum = "no_dnp"
 
 #two-point model
-n_ref = 1
-Lambda_ref = 0.000226807
-ref_lambda = [1045.2433587850091]
-ref_rho = [0.31650504848545435]
+#n_ref = 1
+#Lambda_ref = 0.000226807
+#ref_lambda = [1045.2433587850091]
+#ref_rho = [0.31650504848545435]
 
 # Feedbacks, False to turn reactivity feedback off. True otherwise.
 feedback = True

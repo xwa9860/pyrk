@@ -40,15 +40,16 @@ class Neutronics(object):
         """
 
         self._iso = v.validate_supported("iso", iso,
-                                         ['u235', 'pu239', 'sfr', 'fhr'])
-        """_iso (str): Fissioning isotope. 'u235', 'pu239', or 'sfr', "fhr"
+                                         ['u235', 'pu239', 'sfr', 'fhr', 'tmsr'])
+        """_iso (str): Fissioning isotope. 'u235', 'pu239', or 'sfr', "fhr", "tmsr"
         are supported."""
 
-        self._e = v.validate_supported("e", e, ['thermal', 'fast', 'multipt'])
+        self._e = v.validate_supported("e", e, ['thermal', 'fast', 'multipt',
+                                                'no_dnp'])
         """_e (str): Energy spectrum 'thermal' or 'fast' are supported."""
 
-        self._npg = v.validate_supported("n_precursors", n_precursors, [6, 8, 0])
-        """_npg (int): Number of neutron precursor groups. 6 is supported."""
+        self._npg = v.validate_supported("n_precursors", n_precursors, [6, 7, 8, 0, 1])
+        """_npg (int): Number of neutron precursor groups."""
 
         self._ndg = v.validate_supported("n_decay", n_decay, [11, 0])
         """_ndg (int): Number of decay heat groups. 11 is supported."""
