@@ -71,6 +71,7 @@ class PrecursorData(object):
                                         0.00109860000000000, 0.00308397000000000,
                                         0.000904433000000000, 0.000318147000000000]
         beta_dict["tmsr"]["no_dnp"] = []
+        beta_dict["tmsr"]["no_dnp_multipt"] = [0.31650504848545435]
         beta_dict["tmsr"]["multipt"] = [0.000221045000000000, 0.00114628000000000,
                                         0.00109860000000000, 0.00308397000000000,
                                         0.000904433000000000, 0.000318147000000000,
@@ -104,6 +105,7 @@ class PrecursorData(object):
                                           0.109394000000000, 0.317100000000000,
                                           1.35373000000000, 8.64310000000000]
         lambda_dict["tmsr"]["no_dnp"] = []
+        lambda_dict["tmsr"]["no_dnp_multipt"] = [1045.2433587850091]
         lambda_dict["tmsr"]["multipt"] = [0.0124906000000000, 0.0318196000000000,
                                           0.109394000000000, 0.317100000000000,
                                           1.35373000000000, 8.64310000000000,
@@ -131,6 +133,7 @@ class PrecursorData(object):
         Lambda_dict["fhr"]["thermal"] = 5.35878E-04 #ADJ_NAUCHI_LIFETIME from serpent
         Lambda_dict["tmsr"]["thermal"] = 0.000572523000000000 #ADJ_NAUCHI_LIFETIME from serpent
         Lambda_dict["tmsr"]["no_dnp"] = 0.000572523000000000 #ADJ_NAUCHI_LIFETIME from serpent
+        Lambda_dict["tmsr"]["no_dnp_multipt"] =5.0658E-4
         #  tmsr without delayed neutron precursors
         Lambda_dict["tmsr"]["multipt"] = 5.0658E-4
         Lambda_dict["fhr"]["multipt"] = 0.000226807

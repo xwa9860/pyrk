@@ -45,7 +45,7 @@ class Neutronics(object):
         are supported."""
 
         self._e = v.validate_supported("e", e, ['thermal', 'fast', 'multipt',
-                                                'no_dnp'])
+                                                'no_dnp', 'no_dnp_multipt'])
         """_e (str): Energy spectrum 'thermal' or 'fast' are supported."""
 
         self._npg = v.validate_supported("n_precursors", n_precursors, [6, 7, 8, 0, 1])

@@ -91,6 +91,7 @@ class DecayData(object):
         lambda_dict["fhr"]["multipt"] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         lambda_dict["tmsr"]["multipt"] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         lambda_dict["tmsr"]["no_dnp"] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        lambda_dict["tmsr"]["no_dnp_multipt"] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         return lambda_dict[nuc][e]
 
     def _get_kappas(self, nuc, e):
@@ -135,4 +136,5 @@ class DecayData(object):
         kappa_dict["tmsr"]["thermal"] = [0.0, 0.0, 0.0]
         kappa_dict["tmsr"]["multipt"] = [0.0, 0.0, 0.0]
         kappa_dict["tmsr"]["no_dnp"] = [0.0, 0.0, 0.0]
+        kappa_dict["tmsr"]["no_dnp_multipt"] = [0.0, 0.0, 0.0]
         return kappa_dict[nuc][e]
