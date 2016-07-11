@@ -125,20 +125,20 @@ cool = LiquidMaterial('cool', k_cool, cp_cool, rho_cool, mu0)
 h_cool = ConvectiveModel(h0=6000.0*units.watt/units.kelvin/units.meter**2,
                          mat=cool,
                          model='constant')
-m_flow = 976.0*units.kg/units.seconds
-t_inlet = units.Quantity(600.0, units.degC)
+m_flow = 150*units.kg/units.seconds  # inlet velocity 0.14m/s
+t_inlet = units.Quantity(672.0, units.degC)
 
 fuel = th.THComponent(name="fuel",
-                     mat=Fuel,
-                     vol=vol_fuel,
-                     T0=t_fuel,
-                     alpha_temp=alpha_fuel,
-                     timer=ti,
-                     heatgen=True,
-                     power_tot=power_tot/n_pebbles,
-                     sph=True,
-                     ri=0.0*units.meter,
-                     ro=r_fuel)
+                        mat=Fuel,
+                        vol=vol_fuel,
+                        T0=t_fuel,
+                        alpha_temp=alpha_fuel,
+                        timer=ti,
+                        heatgen=True,
+                        power_tot=power_tot/n_pebbles,
+                        sph=True,
+                        ri=0.0*units.meter,
+                        ro=r_fuel)
 
 # mesh size for the fuel pebble FVM calculation
 l = 0.0005*units.meter
