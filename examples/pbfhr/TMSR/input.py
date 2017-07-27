@@ -98,7 +98,7 @@ from reactivity_insertion import StepReactivityInsertion
 rho_ext = StepReactivityInsertion(timer=ti,
                                   t_step=t_feedback + 10.0*units.seconds,
                                   rho_init=0.0*units.delta_k,
-                                  rho_final=650.0*units.pcm)
+                                  rho_final=0.5*650.0*units.pcm)
 
 # maximum number of internal steps that the ode solver will take
 nsteps = 5000
@@ -129,16 +129,16 @@ m_flow = 976.0*units.kg/units.seconds
 t_inlet = units.Quantity(600.0, units.degC)
 
 fuel = th.THComponent(name="fuel",
-                     mat=Fuel,
-                     vol=vol_fuel,
-                     T0=t_fuel,
-                     alpha_temp=alpha_fuel,
-                     timer=ti,
-                     heatgen=True,
-                     power_tot=power_tot/n_pebbles,
-                     sph=True,
-                     ri=0.0*units.meter,
-                     ro=r_fuel)
+                    mat=Fuel,
+                    vol=vol_fuel,
+                    T0=t_fuel,
+                    alpha_temp=alpha_fuel,
+                    timer=ti,
+                    heatgen=True,
+                    power_tot=power_tot/n_pebbles,
+                    sph=True,
+                    ri=0.0*units.meter,
+                    ro=r_fuel)
 
 # mesh size for the fuel pebble FVM calculation
 l = 0.0005*units.meter
