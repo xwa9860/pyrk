@@ -1,4 +1,6 @@
-''' changed from the initial input file
+'''
+updated on Aug 9, 2017 by Xin Wang
+changed from the initial input file
 to represent a simplified model for the FHR core
 
 The simulation has 3 stages:
@@ -33,12 +35,12 @@ t_feedback = 40.0*units.seconds
 
 # Thermal hydraulic params
 # Temperature feedbacks of reactivity
-alpha_fuel = -2.72207*units.pcm/units.kelvin
-alpha_cool = -0.78422*units.pcm/units.kelvin
+alpha_fuel = -2.68*units.pcm/units.kelvin
+alpha_cool = -0.138*units.pcm/units.kelvin
 
 # initial temperature
-t_fuel = 1080.657*units.kelvin  # from comsol steady state
-t_cool = 959.5507*units.kelvin  # from comsol steady state
+t_fuel = (691+273.15)*units.kelvin  # from comsol steady state
+t_cool = (678+273.15)*units.kelvin  # from comsol steady state
 
 kappa = 0.0
 
@@ -82,13 +84,13 @@ n_dg = 0
 # Fissioning Isotope
 fission_iso = "tmsr"
 # Spectrum
-spectrum = "multipt"
+spectrum = "thermal"
 
 #two-point model
-n_ref = 1
-Lambda_ref = 0.000226807
-ref_lambda = [1045.2433587850091]
-ref_rho = [0.31650504848545435]
+n_ref = 0
+# Lambda_ref = 0.000226807
+# ref_lambda = [1045.2433587850091]
+# ref_rho = [0.31650504848545435]
 
 # Feedbacks, False to turn reactivity feedback off. True otherwise.
 feedback = True
@@ -98,23 +100,23 @@ from reactivity_insertion import StepReactivityInsertion
 rho_ext = StepReactivityInsertion(timer=ti,
                                   t_step=t_feedback + 10.0*units.seconds,
                                   rho_init=0.0*units.delta_k,
-                                  rho_final=0.5*650.0*units.pcm)
+                                  rho_final=650.0*units.pcm)
 
 # maximum number of internal steps that the ode solver will take
 nsteps = 5000
 
 k_fuel = 15*units.watt/(units.meter*units.kelvin)
-cp_fuel = 1818.0*units.joule/units.kg/units.kelvin
-rho_fuel = DensityModel(a=2220.0*units.kg/(units.meter**3), model="constant")
+cp_fuel = 1564.0*units.joule/units.kg/units.kelvin
+rho_fuel = DensityModel(a=3220.0*units.kg/(units.meter**3), model="constant")
 Fuel = Material('fuel', k_fuel, cp_fuel, rho_fuel)
 
 
-mu0=0*units.pascal*units.second
-k_cool = 1*units.watt/(units.meter*units.kelvin)
-cp_cool = 2415.78*units.joule/(units.kg*units.kelvin)
-rho_cool = DensityModel(a=2415.6 *
+mu0 = 0*units.pascal*units.second
+k_cool = 1.1*units.watt/(units.meter*units.kelvin)
+cp_cool = 2386*units.joule/(units.kg*units.kelvin)
+rho_cool = DensityModel(a=2413 *
                         units.kg /
-                        (units.meter**3), b=0.49072 *
+                        (units.meter**3), b=-0.488 *
                         units.kg /
                         (units.meter**3) /
                         units.kelvin, model="linear")
@@ -125,21 +127,21 @@ cool = LiquidMaterial('cool', k_cool, cp_cool, rho_cool, mu0)
 h_cool = ConvectiveModel(h0=6000.0*units.watt/units.kelvin/units.meter**2,
                          mat=cool,
                          model='constant')
-m_flow = 976.0*units.kg/units.seconds
-t_inlet = units.Quantity(600.0, units.degC)
+m_flow = 120.0*units.kg/units.seconds
+t_inlet = units.Quantity(672.0, units.degC)
 
 fuel = th.THComponent(name="fuel",
-                    mat=Fuel,
-                    vol=vol_fuel,
-                    T0=t_fuel,
-                    alpha_temp=alpha_fuel,
-                    timer=ti,
-                    heatgen=True,
-                    power_tot=power_tot/n_pebbles,
-                    sph=True,
-                    ri=0.0*units.meter,
-                    ro=r_fuel)
-
+                      mat=Fuel,
+                      vol=vol_fuel,
+                      T0=t_fuel,
+                      alpha_temp=alpha_fuel,
+                      timer=ti,
+                      heatgen=True,
+                      power_tot=power_tot/n_pebbles,
+                      sph=True,
+                      ri=0.0*units.meter,
+                      ro=r_fuel)
+  
 # mesh size for the fuel pebble FVM calculation
 l = 0.0005*units.meter
 comp_list = fuel.mesh(l)

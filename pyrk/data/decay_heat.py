@@ -90,6 +90,7 @@ class DecayData(object):
         lambda_dict["fhr"]["thermal"] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         lambda_dict["fhr"]["multipt"] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         lambda_dict["tmsr"]["multipt"] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        lambda_dict["tmsr"]["thermal"] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         lambda_dict["tmsr"]["no_dnp"] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         lambda_dict["tmsr"]["no_dnp_multipt"] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         return lambda_dict[nuc][e]
